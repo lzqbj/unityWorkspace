@@ -12,11 +12,13 @@ public class LoadWaiting : MonoBehaviour
     /// <returns></returns>
     IEnumerator Start()
     {
-        for (int i = 0; i < 120; i++)
-        {
-            loadbar.fillAmount += 1 / 120f;
-            yield return new WaitForEndOfFrame();
-        }
-        Application.LoadLevel("HomeScene");
+        //for (int i = 0; i < 120; i++)
+        //{
+        //    loadbar.fillAmount += 1 / 120f;
+        //    yield return new WaitForEndOfFrame();
+        //}
+        //Application.LoadLevel("HomeScene");
+        yield return new WaitForEndOfFrame();
+        ButtonActionController.Click.SelectMap(1);
     }
 }

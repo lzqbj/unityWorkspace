@@ -82,4 +82,9 @@ public class SoundMusicButtonControll : MonoBehaviour
         }
         SoundController.Sound.Click();
     }
+
+    public void SetVisible(bool _show){
+        Sound.gameObject.SetActive(_show);
+        Music.gameObject.SetActive(_show);
+    }
 }
