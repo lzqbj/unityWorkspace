@@ -37,6 +37,8 @@ public class DataLoader : MonoBehaviour
 
     public SoundMusicButtonControll  soundMusicControll;
 
+    public GameObject homeUI;
+
     bool hold;
 
     GameObject holdobj;
@@ -83,6 +85,7 @@ public class DataLoader : MonoBehaviour
     IEnumerator MapButtonDrawer()
     {
         DataLoader.enableclick = false;
+        homeUI.SetActive(false);
         soundMusicControll.SetVisible(false);
         MapPosD();
         processbar.fillAmount = 0.3f;
@@ -107,6 +110,7 @@ public class DataLoader : MonoBehaviour
         processbar.transform.parent.gameObject.SetActive(false);
         DataLoader.enableclick = true;
         soundMusicControll.SetVisible(true);
+        homeUI.SetActive(true);
         if (CameraMovement.StarPointMoveIndex != -1 && CameraMovement.StarPointMoveIndex != 297)
         {
             StarPointMove();

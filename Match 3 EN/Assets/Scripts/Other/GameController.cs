@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour
 {
@@ -37,6 +38,8 @@ public class GameController : MonoBehaviour
     public bool isAddPower;
 
     public Animation StartAnim;
+    //道具显示背景
+    public GameObject prop_bg;
 
     private JewelObj JewelScript;
     private JewelObj JewelScript1;
@@ -44,6 +47,8 @@ public class GameController : MonoBehaviour
     private GameObject Pointer;
 
     private GameObject Selected;
+
+    bool isDoHammer = false;
 
     bool ishold;
     void Awake()
@@ -63,13 +68,56 @@ public class GameController : MonoBehaviour
         Timer.timer.TimeTick(true);
         GameState = (int)Timer.GameState.PLAYING;
         NoSelect.SetActive(false);
+        isDoHammer = false;
     }
 
     void Update()
     {
         JewelSelecter();
         backpress();
+        hammerSelect();
     }
+
+    private void hammerSelect()
+    {
+        if (Input.GetMouseButtonUp(0) && isDoHammer)
+            {
+
+                GameObject pointer = JewelTouchChecker(Input.mousePosition);
+                if (pointer != null)
+                {
+                    JewelObj JewelScript = pointer.GetComponent<JewelObj>();
+                    Supporter.sp.StopSuggestionAnim();
+                    if (JewelScript != null && JewelScript.jewel.JewelType != 99)
+                    {
+                        JewelScript.Destroy();
+                        dropjewel();
+
+                        
+                    }
+
+                }
+#if IPHONE || ANDROID
+                 if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+#else
+                if (EventSystem.current.IsPointerOverGameObject())
+#endif
+                {
+                    //点击UI
+                    if (EventSystem.current.currentSelectedGameObject == null  || !EventSystem.current.currentSelectedGameObject.name.Contains("prop_hummer"))
+                    {
+                        Debug.Log("---点击UI 不为锤子");
+                        isDoHammer = false;
+                        prop_bg.SetActive(false);
+                        JewelSpawner.spawn.transform.position = new Vector3(0, 0, 0);
+                        JewelSpawner.spawn.transform.SetAsLastSibling();
+                    }
+                }
+            }
+
+    }
+
+    
     //process click action
     void JewelSelecter()
     {
@@ -621,16 +669,30 @@ public class GameController : MonoBehaviour
     /// <summary>
     /// 使用锤子
     /// </summary>
-	public void DoHammer()
+	public void DoHammer(GameObject arg)
 	{
-		int x = 4;
-		int y = 2;
-		JewelObj obj = JewelSpawner.spawn.JewelGribScript[x, y];
-		if (obj != null && obj.jewel.JewelType != 99)
-		{
-			obj.Destroy();
-			dropjewel();
-		}
+        Debug.Log("--------使用锤子");
+        if (!isDoHammer)
+        {
+            if (Pointer != null)
+            {   
+                //选取方块为空
+                Selected = null;
+                Selector.SetActive(false);
+                Pointer = null;
+            }
+            isDoHammer = true;
+            prop_bg.SetActive(true);
+            JewelSpawner.spawn.transform.position = new Vector3(0, 0, -0.4f);
+            arg.transform.SetAsLastSibling();
+        }
+        else
+        {
+            isDoHammer = false;
+            prop_bg.SetActive(false);
+            JewelSpawner.spawn.transform.position = new Vector3(0, 0, 0);
+            JewelSpawner.spawn.transform.SetAsLastSibling();
+        }
 	}
 
 }
