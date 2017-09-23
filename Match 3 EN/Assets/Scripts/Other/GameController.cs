@@ -50,6 +50,8 @@ public class GameController : MonoBehaviour
 
     bool isDoHammer = false;
 
+    bool isExChange = false;
+
     bool ishold;
     void Awake()
     {
@@ -69,6 +71,7 @@ public class GameController : MonoBehaviour
         GameState = (int)Timer.GameState.PLAYING;
         NoSelect.SetActive(false);
         isDoHammer = false;
+        isExChange = false;
     }
 
     void Update()
@@ -80,22 +83,24 @@ public class GameController : MonoBehaviour
 
     private void hammerSelect()
     {
-        if (Input.GetMouseButtonUp(0) && isDoHammer)
+        if (Input.GetMouseButtonUp(0) && (isDoHammer || isExChange))
             {
-
-                GameObject pointer = JewelTouchChecker(Input.mousePosition);
-                if (pointer != null)
+                //锤子道具销毁宝石
+                if (isDoHammer)
                 {
-                    JewelObj JewelScript = pointer.GetComponent<JewelObj>();
-                    Supporter.sp.StopSuggestionAnim();
-                    if (JewelScript != null && JewelScript.jewel.JewelType != 99)
+                    GameObject pointer = JewelTouchChecker(Input.mousePosition);
+                    if (pointer != null)
                     {
-                        JewelScript.Destroy();
-                        dropjewel();
-
+                        JewelObj JewelScript = pointer.GetComponent<JewelObj>();
+                        Supporter.sp.StopSuggestionAnim();
+                        if (JewelScript != null && JewelScript.jewel.JewelType != 99)
+                        {
+                            JewelScript.Destroy();
+                            dropjewel();
                         
-                    }
+                        }
 
+                    }
                 }
 #if IPHONE || ANDROID
                  if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
@@ -104,10 +109,11 @@ public class GameController : MonoBehaviour
 #endif
                 {
                     //点击UI
-                    if (EventSystem.current.currentSelectedGameObject == null  || !EventSystem.current.currentSelectedGameObject.name.Contains("prop_hummer"))
+                    if (EventSystem.current.currentSelectedGameObject == null  || !EventSystem.current.currentSelectedGameObject.name.Contains("prop_"))
                     {
-                        Debug.Log("---点击UI 不为锤子");
+                        Debug.Log("---点击UI 不为道具");
                         isDoHammer = false;
+                        isExChange = false;
                         prop_bg.SetActive(false);
                         JewelSpawner.spawn.transform.position = new Vector3(0, 0, 0);
                         JewelSpawner.spawn.transform.SetAsLastSibling();
@@ -203,9 +209,25 @@ public class GameController : MonoBehaviour
             JewelProcess(NeiObj1, NeiObj2, obj1, obj2);
         }
         else
-        {
-            Jewel1.SetBackAnimation(obj2);
-            Jewel2.SetBackAnimation(obj1);
+        {   
+            //判断是否使用强制交换
+            if (isExChange)
+            {
+
+                Ulti.MoveTo(obj1, obj2.transform.localPosition, 0.2f);
+                Ulti.MoveTo(obj2, obj1.transform.localPosition, 0.2f);
+                SwapJewelPosition(obj1, obj2);
+
+                isExChange = false;
+                prop_bg.SetActive(false);
+                JewelSpawner.spawn.transform.position = new Vector3(0, 0, 0);
+                JewelSpawner.spawn.transform.SetAsLastSibling();
+            }
+            else
+            {
+                Jewel1.SetBackAnimation(obj2);
+                Jewel2.SetBackAnimation(obj1);
+            }
         }
     }
 
@@ -256,7 +278,11 @@ public class GameController : MonoBehaviour
         }
 
     }
-
+    /// <summary>
+    /// 根据不同相同数量不同效果
+    /// </summary>
+    /// <param name="list">相同的宝石列表</param>
+    /// <returns></returns>
     bool ListProcess(List<JewelObj> list, GameObject obj, GameObject obj1, int type)
     {
         Vector3 v;
@@ -683,6 +709,7 @@ public class GameController : MonoBehaviour
             }
             isDoHammer = true;
             prop_bg.SetActive(true);
+            prop_bg.transform.SetAsLastSibling();
             JewelSpawner.spawn.transform.position = new Vector3(0, 0, -0.4f);
             arg.transform.SetAsLastSibling();
         }
@@ -694,5 +721,42 @@ public class GameController : MonoBehaviour
             JewelSpawner.spawn.transform.SetAsLastSibling();
         }
 	}
+    /// <summary>
+    /// 交换
+    /// </summary>
+    public void ExChange(GameObject arg)
+    {
+        Debug.Log("--------交换");
+        if (!isExChange)
+        {
+            if (Pointer != null)
+            {
+                //选取方块为空
+                Selected = null;
+                Selector.SetActive(false);
+                Pointer = null;
+            }
+            isExChange = true;
+            prop_bg.SetActive(true);
+            prop_bg.transform.SetAsLastSibling();
+            JewelSpawner.spawn.transform.position = new Vector3(0, 0, -0.4f);
+            arg.transform.SetAsLastSibling();
+        }
+        else
+        {
+            isExChange = false;
+            prop_bg.SetActive(false);
+            JewelSpawner.spawn.transform.position = new Vector3(0, 0, 0);
+            JewelSpawner.spawn.transform.SetAsLastSibling();
+        }
+
+    }
+    /// <summary>
+    /// 点击道具背景
+    /// </summary>
+    public void ClickPropBg()
+    {
+        Debug.Log("-----------点击道具背景");
+    }
 
 }
