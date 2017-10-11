@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root type="PropPrototype">
+	<element Static_ID="1001001" Name="刷新" Description="重新生成棋盘。" Price="30" Icon="prop_random" Path="" />
+	<element Static_ID="1001002" Name="小木槌" Description="消除任意宝石。" Price="40" Icon="prop_hummer" Path="" />
+	<element Static_ID="1001003" Name="增加时间" Description="增加时间22秒。" Price="25" Icon="prop_time" Path="" />
+	<element Static_ID="1001004" Name="强制交换" Description="强制交换相邻的两个宝石。" Price="80" Icon="prop_exchange" Path="" />
+	<element Static_ID="1001005" Name="魔法棒" Description="将任一宝石变成爆炸特效。" Price="100" Icon="prop_magic" Path="" />
+</root>

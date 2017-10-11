@@ -2,7 +2,7 @@
 using System.Collections;
 using System.IO;
 using System.Collections.Generic;
-
+using Core.Template;
 public class DataLoader : MonoBehaviour
 {
     public static DataLoader Data;                              // instance of  this class
@@ -59,7 +59,8 @@ public class DataLoader : MonoBehaviour
             PlayerPrefs.SetString(KEY_DATA, datadefaut);
             PlayerPrefs.SetInt(KEY_FRISTTIME, 1);
         }
-
+        //加载 静态数据xml
+        StartCoroutine(LoadXml());
         StartCoroutine(MapButtonDrawer());
     }
 
@@ -76,6 +77,14 @@ public class DataLoader : MonoBehaviour
             }
         }
         return null;
+    }
+    /// <summary>
+    /// 开启协程加载xml
+    /// </summary>
+    IEnumerator LoadXml()
+    {
+        PrototypeManager.Instance.LoadXml();
+        yield return null;
     }
 
     /// <summary>

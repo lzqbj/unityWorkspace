@@ -87,6 +87,8 @@
     <Compile Include="Assets\GoogleMobileAds\Platforms\iOS\IOSBannerClient.cs" />
     <Compile Include="Assets\GoogleMobileAds\Platforms\iOS\IOSInterstitialClient.cs" />
     <Compile Include="Assets\GoogleMobileAds\Platforms\iOS\MonoPInvokeCallbackAttribute.cs" />
+    <Compile Include="Assets\Scripts\Core\ILoad.cs" />
+    <Compile Include="Assets\Scripts\Defines\Define.cs" />
     <Compile Include="Assets\Scripts\Home\Home.cs" />
     <Compile Include="Assets\Scripts\Home\LoadWaiting.cs" />
     <Compile Include="Assets\Scripts\Libs\AdmobGA.cs" />
@@ -122,6 +124,12 @@
     <Compile Include="Assets\Scripts\Play\glass.cs" />
     <Compile Include="Assets\Scripts\Resolution\MultiResolution.cs" />
     <Compile Include="Assets\Scripts\Resolution\Resolution.cs" />
+    <Compile Include="Assets\Scripts\Template\PropPrototype.cs" />
+    <Compile Include="Assets\Scripts\Template\PrototypeData.cs" />
+    <Compile Include="Assets\Scripts\Template\PrototypeManager.cs" />
+    <Compile Include="Assets\Scripts\Tools\GameDebug.cs" />
+    <Compile Include="Assets\Scripts\Tools\ResourcesManager.cs" />
+    <Compile Include="Assets\Scripts\Tools\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Fonts\Textured Text Shader.shader" />
@@ -522,6 +530,7 @@
     <None Include="Assets\Resources\Maps\98.txt" />
     <None Include="Assets\Resources\Maps\99.txt" />
     <None Include="Assets\Resources\Maps\classic.txt" />
+    <None Include="Assets\Resources\PrototypeFiles\PropPrototype.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>
