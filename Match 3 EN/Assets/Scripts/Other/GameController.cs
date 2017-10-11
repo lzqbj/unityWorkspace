@@ -52,6 +52,8 @@ public class GameController : MonoBehaviour
 
     bool isExChange = false;
 
+    bool isMagic = false;
+
     bool ishold;
     void Awake()
     {
@@ -72,6 +74,7 @@ public class GameController : MonoBehaviour
         NoSelect.SetActive(false);
         isDoHammer = false;
         isExChange = false;
+        isMagic = false;
     }
 
     void Update()
@@ -83,7 +86,7 @@ public class GameController : MonoBehaviour
 
     private void hammerSelect()
     {
-        if (Input.GetMouseButtonUp(0) && (isDoHammer || isExChange))
+        if (Input.GetMouseButtonUp(0) && (isDoHammer || isExChange || isMagic))
             {
                 //锤子道具销毁宝石
                 if (isDoHammer)
@@ -102,6 +105,23 @@ public class GameController : MonoBehaviour
 
                     }
                 }
+                //魔法道具
+                if (isMagic)
+                {
+                    GameObject pointer = JewelTouchChecker(Input.mousePosition);
+                    if (pointer != null)
+                    {
+                        JewelObj JewelScript = pointer.GetComponent<JewelObj>();
+                        Supporter.sp.StopSuggestionAnim();
+                        if (JewelScript != null && JewelScript.jewel.JewelType != 99)
+                        {
+                            Vector3 v = new Vector3(JewelScript.jewel.JewelPosition.x, JewelScript.jewel.JewelPosition.y);
+                            StartCoroutine(SpawnJewelPower(JewelScript.jewel.JewelType, (int)Power.BOOM, v));
+                        }
+
+                    }
+                }
+                
 #if IPHONE || ANDROID
                  if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
 #else
@@ -114,6 +134,7 @@ public class GameController : MonoBehaviour
                         Debug.Log("---点击UI 不为道具");
                         isDoHammer = false;
                         isExChange = false;
+                        isMagic = false;
                         prop_bg.SetActive(false);
                         JewelSpawner.spawn.transform.position = new Vector3(0, 0, 0);
                         JewelSpawner.spawn.transform.SetAsLastSibling();
@@ -757,6 +778,41 @@ public class GameController : MonoBehaviour
     public void ClickPropBg()
     {
         Debug.Log("-----------点击道具背景");
+    }
+    /// <summary>
+    /// 点击魔法棒
+    /// </summary>
+    public void ClickMagic(GameObject arg)
+    {
+        Debug.Log("-----------点击魔法棒");
+        //EffectSpawner.effect.glass();
+        //int x = 4;
+        //int y = 2;
+        //JewelObj obj = JewelSpawner.spawn.JewelGribScript[x, y];
+        //Vector3 v = new Vector3(obj.jewel.JewelPosition.x, obj.jewel.JewelPosition.y);
+        //StartCoroutine(SpawnJewelPower(obj.jewel.JewelType, (int)Power.BOOM, v));
+        if (!isMagic)
+        {
+            if (Pointer != null)
+            {
+                //选取方块为空
+                Selected = null;
+                Selector.SetActive(false);
+                Pointer = null;
+            }
+            isMagic = true;
+            prop_bg.SetActive(true);
+            prop_bg.transform.SetAsLastSibling();
+            JewelSpawner.spawn.transform.position = new Vector3(0, 0, -0.4f);
+            arg.transform.SetAsLastSibling();
+        }
+        else
+        {
+            isMagic = false;
+            prop_bg.SetActive(false);
+            JewelSpawner.spawn.transform.position = new Vector3(0, 0, 0);
+            JewelSpawner.spawn.transform.SetAsLastSibling();
+        }
     }
 
 }
