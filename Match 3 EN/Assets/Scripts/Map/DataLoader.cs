@@ -39,6 +39,8 @@ public class DataLoader : MonoBehaviour
 
     public GameObject homeUI;
 
+    public GameObject loadUI;
+
     bool hold;
 
     GameObject holdobj;
@@ -94,6 +96,7 @@ public class DataLoader : MonoBehaviour
     IEnumerator MapButtonDrawer()
     {
         DataLoader.enableclick = false;
+        loadUI.gameObject.SetActive(true);
         homeUI.SetActive(false);
         soundMusicControll.SetVisible(false);
         MapPosD();

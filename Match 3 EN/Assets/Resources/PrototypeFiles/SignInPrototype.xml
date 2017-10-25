@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root type="SignInPrototype">
+	<element Static_ID="1002001" Type="1" Description="1" Value="100" />
+	<element Static_ID="1002002" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002003" Type="2" Description="3" Value="1001001" />
+	<element Static_ID="1002004" Type="1" Description="4" Value="200" />
+	<element Static_ID="1002005" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002006" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002007" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002008" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002009" Type="3" Description="9" Value="1001002" />
+	<element Static_ID="1002010" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002011" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002012" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002013" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002014" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002015" Type="4" Description="2" Value="1001003" />
+	<element Static_ID="1002016" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002017" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002018" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002019" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002020" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002021" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002022" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002023" Type="5" Description="2" Value="1001004" />
+	<element Static_ID="1002024" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002025" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002026" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002027" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002028" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002029" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002030" Type="1" Description="2" Value="200" />
+	<element Static_ID="1002031" Type="1" Description="2" Value="200" />
+	
+</root>

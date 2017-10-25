@@ -138,7 +138,9 @@ namespace Core.Template
         private void StartLoadXml()
         {
             pathArray.Add("PropPrototype");
-            
+            pathArray.Add("SignInPrototype");
+            pathArray.Add("ShopPrototype");
+            pathArray.Add("GoldPrototype");
 
             for (int i = 0; i < pathArray.Count; i++)
             {

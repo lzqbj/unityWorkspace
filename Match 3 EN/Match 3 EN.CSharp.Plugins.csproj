@@ -478,7 +478,10 @@
     <None Include="Assets\Resources\Maps\98.txt" />
     <None Include="Assets\Resources\Maps\99.txt" />
     <None Include="Assets\Resources\Maps\classic.txt" />
+    <None Include="Assets\Resources\PrototypeFiles\GoldPrototype.xml" />
     <None Include="Assets\Resources\PrototypeFiles\PropPrototype.xml" />
+    <None Include="Assets\Resources\PrototypeFiles\ShopPrototype.xml" />
+    <None Include="Assets\Resources\PrototypeFiles\SignInPrototype.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>

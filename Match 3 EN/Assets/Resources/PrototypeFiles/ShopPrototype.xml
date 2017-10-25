@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root type="ShopPrototype">
+	<element Static_ID="1003001" Name="小木槌(3个)" Description="小木槌3个" Num="3" OriginalPrice="205" Price="199" Sale="9" Icon="prop_random" Time="0" Value="1001002"/>
+	<element Static_ID="1003002" Name="增加时间" Description="增加时间" Num="1" OriginalPrice="0" Price="25" Sale="10" Icon="prop_random" Time="0" Value="1001003"/>
+	<element Static_ID="1003003" Name="刷新(5个)" Description="刷新5个" Num="5" OriginalPrice="150" Price="139" Sale="9" Icon="prop_random" Time="7" Value="1001001"/>
+</root>
