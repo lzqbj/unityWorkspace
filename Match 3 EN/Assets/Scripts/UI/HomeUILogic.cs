@@ -20,6 +20,16 @@ public class HomeUILogic : MonoBehaviour {
 
     public Sprite[] dayNormalSprite;    //签到默认图片
     public Sprite[] dayClickSprite;     //已签到图片
+    public GameObject shopPanel;        //商店界面
+    public GameObject propScrollView;   //道具列表
+    public GameObject propItem;         //商店道具预设
+    public GameObject shopContent;      //商店内容
+    public Sprite[] propIconSprite;     //道具图片
+
+    public GameObject goldScrollView;   //金币列表
+    public GameObject goldItem;         //商店金币预设
+    public GameObject goldContent;      //金币内容
+    public Sprite[] goldIconSprite;     //金币图片
 
     const string SIGNDAYS = "signdays";                     //上次签到日期
     const string SIGNSTARTDAY = "signstartday";             //开始这轮签到日期
@@ -173,11 +183,70 @@ public class HomeUILogic : MonoBehaviour {
 
     }
 
+    public void closeShopPanele()
+    {
+        shopPanel.SetActive(false);
+    }
     /// <summary>
     /// 点击商店
     /// </summary>
     public void ClickShop()
     {
         GameDebug.Log("--------点击商店");
+        shopPanel.SetActive(true);
+        onClickPropScrollView();
+
+    }
+
+    /// <summary>
+    /// 点击商店道具界面
+    /// </summary>
+    public void onClickPropScrollView()
+    {
+        propScrollView.gameObject.SetActive(true);
+        goldScrollView.gameObject.SetActive(false);
+
+        for (int i = 0; i < shopContent.transform.childCount; i++)
+        {
+            GameObject go = shopContent.transform.GetChild(i).gameObject;
+            Destroy(go);
+        }
+
+        List<PrototypeData> shopProtoList = PrototypeManager.Instance.GetDataListByType("ShopPrototype");
+
+        for (int j = 0; j < shopProtoList.Count; j++)
+        {
+            GameObject shopItem = (GameObject)Instantiate(propItem);
+            ShopPrototype shopData = shopProtoList[j] as ShopPrototype;
+            GameDebug.Log("-----商店=" + shopData.Name);
+            shopItem.transform.parent = shopContent.transform;
+            shopItem.transform.localScale = new Vector3(1, 1, 1);
+
+            Text xianjia = shopItem.transform.FindChild("xianjia").GetComponent<Text>();
+            xianjia.text = shopData.Price.ToString();
+            Text yuanjia = shopItem.transform.FindChild("yuanjia").GetComponent<Text>();
+            yuanjia.text = shopData.OriginalPrice.ToString();
+            Image icon = shopItem.transform.FindChild("icon").GetComponent<Image>();
+            icon.sprite = propIconSprite[shopData.Icon - 1];
+            Text num = shopItem.transform.FindChild("num").GetComponent<Text>();
+            num.text = shopData.Num.ToString();
+            Text saleNum = shopItem.transform.FindChild("saleNum").GetComponent<Text>();
+            saleNum.text = shopData.Sale.ToString();
+
+            Button shopButton = shopItem.GetComponent<Button>();
+            shopButton.onClick.AddListener(() => onShopClick(shopData));
+        }
+    }
+    void onShopClick(ShopPrototype data)
+    {
+        GameDebug.Log("-----商店=" + data.Name);
+    }
+    /// <summary>
+    /// 点击商店金币界面
+    /// </summary>
+    public void onClickGoldScrollView()
+    {
+        propScrollView.gameObject.SetActive(false);
+        goldScrollView.gameObject.SetActive(true);
     }
 }

@@ -35,7 +35,8 @@ namespace Core.Template {
         /// <summary>
         /// 图标
         /// </summary>
-        public string Icon = string.Empty;
+        //public string Icon = string.Empty;
+        public int Icon = 1;
         /// <summary>
         /// 限时时间（天）
         /// </summary>
@@ -62,7 +63,8 @@ namespace Core.Template {
             if (data.Attributes["Time"] != null)
                 int.TryParse(data.Attributes["Time"].Value, out Time);
             if (data.Attributes["Icon"] != null)
-                Icon = data.Attributes["Icon"].Value;
+                int.TryParse(data.Attributes["Icon"].Value, out Icon);
+                //Icon = data.Attributes["Icon"].Value;
             if (data.Attributes["Value"] != null)
                 Value = data.Attributes["Value"].Value;
         }

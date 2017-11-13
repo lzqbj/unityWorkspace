@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <root type="GoldPrototype">
-	<element Static_ID="1004001" Name="小份" Type="1" Price="6" Icon="prop_random" Num="60" giftNum="2"/>
-	<element Static_ID="1004002" Name="小份" Type="1" Price="6" Icon="prop_random" Num="60" giftNum="2"/>
-	<element Static_ID="1004003" Name="小份" Type="1" Price="6" Icon="prop_random" Num="60" giftNum="2"/>
-	<element Static_ID="1004004" Name="小份" Type="1" Price="6" Icon="prop_random" Num="60" giftNum="2"/>
+	<element Static_ID="1004001" Name="小份" Type="1" Price="6" Icon="1" Num="60" giftNum="2"/>
+	<element Static_ID="1004002" Name="中份" Type="2" Price="18" Icon="2" Num="180" giftNum="8"/>
+	<element Static_ID="1004003" Name="大份" Type="3" Price="30" Icon="3" Num="300" giftNum="40"/>
+	<element Static_ID="1004004" Name="超大份" Type="4" Price="128" Icon="4" Num="1280" giftNum="288"/>
 </root>
